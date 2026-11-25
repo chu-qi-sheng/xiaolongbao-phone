@@ -15,9 +15,9 @@ export function normalizeImageModelName(model: string): string {
 export function getUserReferenceImagePolicy(model: string): UserReferenceImagePolicy {
   const normalizedModel = normalizeImageModelName(model);
   const compact = normalizedModel.replace(/-/g, "");
-  const supported = normalizedModel === "gpt-image-2"
-    || compact === "gptimage2"
-    || normalizedModel === "chatgpt-image-2";
+  const supported = normalizedModel.includes("gpt-image-2")
+    || compact.includes("gptimage2")
+    || normalizedModel.includes("chatgpt-image-2");
   return supported
     ? { canAttemptImageInput: true, normalizedModel }
     : { canAttemptImageInput: false, normalizedModel, reason: "model_not_supported" };
